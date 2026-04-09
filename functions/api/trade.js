@@ -3,11 +3,8 @@ export async function onRequestGet(context) {
   const type = searchParams.get('type');   // 'sale' | 'rent'
   const ym   = searchParams.get('ym');     // e.g. '202503'
 
-  const KEY = context.env.MLIT_API_KEY;
+  const KEY = context.env.MLIT_API_KEY || 'c6425e966694d23917ef40d292e3b4f5fa57992dcd8ca0caf40fcf490c1146f2';
 
-  if (!KEY) {
-    return json({ error: 'API 키가 설정되지 않았습니다.' }, 500);
-  }
   if (!type || !ym) {
     return json({ error: 'type, ym 파라미터가 필요합니다.' }, 400);
   }
