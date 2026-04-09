@@ -266,6 +266,7 @@ async function loadData(){
       floor:pi(it['층']||it['floor']),
       type:gt(pf(it['전용면적']||it['excluUseAr']))
     })).filter(x=>x.dep>0&&x.type&&inR(x.y,x.m,x.d));
+    document.getElementById('amsg').innerHTML='<b>첫번째 매매 데이터 필드:</b><br>'+JSON.stringify(fa(si)[0]||si[0]||{});
     setBadge('live');
     msg.className='msg ok';
     msg.textContent=`매매 ${SD.length}건 · 전월세 ${RD.length}건 불러오기 완료`;
