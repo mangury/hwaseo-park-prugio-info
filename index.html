@@ -213,9 +213,7 @@ async function fetchOne(type, ym) {
 }
 
 async function loadData() {
-  const msg = document.getElementById('amsg');
   setBadge('loading');
-  msg.className='msg ing'; msg.textContent='불러오는 중...';
   try {
     const months = getMonths();
     let si=[], ri=[];
@@ -252,15 +250,13 @@ async function loadData() {
     }).filter(x => x.dep>0 && x.type && inR(x.y,x.m,x.d));
 
     setBadge('live');
-    msg.className='msg ok';
-    msg.textContent = `매매 ${SD.length}건 · 전월세 ${RD.length}건 불러오기 완료`;
+    
     document.getElementById('updated').textContent = `마지막 업데이트: ${fdt(TODAY)}`;
     renderSale(SD);
     renderRent(RD);
   } catch(e) {
     setBadge('error');
-    msg.className='msg err';
-    msg.textContent = '오류: ' + e.message;
+    
   }
 }
 
