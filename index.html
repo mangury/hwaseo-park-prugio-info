@@ -13,29 +13,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .htitle{font-size:18px;font-weight:600;color:#111}
 .hsub{font-size:12px;color:#888;margin-top:3px}
 .badge{font-size:11px;padding:3px 10px;border-radius:999px;white-space:nowrap;margin-left:auto}
-.badge.sample{background:#FEF3C7;color:#92400E}
 .badge.live{background:#D1FAE5;color:#065F46}
 .badge.loading{background:#EDE9FE;color:#4C1D95}
 .badge.error{background:#FEE2E2;color:#991B1B}
 .updated{font-size:11px;color:#ccc;text-align:right;margin-bottom:8px}
-.section-label{font-size:13px;font-weight:600;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid #e5e7eb}
+.sec{font-size:13px;font-weight:600;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid #e5e7eb}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:32px}
 @media(max-width:480px){.grid{grid-template-columns:1fr}}
 .card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #eee}
-.card-head{padding:14px 16px 12px}
-.card-tag-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.ch{padding:14px 16px 12px}
+.crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .tag{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
 .cnt{font-size:12px}
-.big-price{font-size:22px;font-weight:700;line-height:1}
-.price-sub{font-size:11px;margin-top:6px;opacity:0.75}
-.t59 .card-head{background:#F0FDFA}.t59 .tag{background:#CCFBF1;color:#134E4A}.t59 .cnt{color:#14B8A6}.t59 .big-price,.t59 .price-sub{color:#134E4A}
-.t74 .card-head{background:#F0F9FF}.t74 .tag{background:#BAE6FD;color:#0C4A6E}.t74 .cnt{color:#0EA5E9}.t74 .big-price,.t74 .price-sub{color:#0C4A6E}
-.t84 .card-head{background:#EFF6FF}.t84 .tag{background:#DBEAFE;color:#1E40AF}.t84 .cnt{color:#3B82F6}.t84 .big-price,.t84 .price-sub{color:#1E3A8A}
-.t104 .card-head{background:#F0FDF4}.t104 .tag{background:#DCFCE7;color:#166534}.t104 .cnt{color:#22C55E}.t104 .big-price,.t104 .price-sub{color:#14532D}
-.t118 .card-head{background:#F5F3FF}.t118 .tag{background:#EDE9FE;color:#4C1D95}.t118 .cnt{color:#8B5CF6}.t118 .big-price,.t118 .price-sub{color:#2E1065}
-.t141 .card-head{background:#FFF7ED}.t141 .tag{background:#FED7AA;color:#7C2D12}.t141 .cnt{color:#F97316}.t141 .big-price,.t141 .price-sub{color:#7C2D12}
-.t148 .card-head{background:#FFF1F2}.t148 .tag{background:#FFE4E6;color:#881337}.t148 .cnt{color:#F43F5E}.t148 .big-price,.t148 .price-sub{color:#881337}
-.t208 .card-head{background:#F8FAFC}.t208 .tag{background:#E2E8F0;color:#1E293B}.t208 .cnt{color:#64748B}.t208 .big-price,.t208 .price-sub{color:#1E293B}
+.bp{font-size:22px;font-weight:700;line-height:1}
+.ps{font-size:11px;margin-top:6px;opacity:.75}
+.t59 .ch{background:#F0FDFA}.t59 .tag{background:#CCFBF1;color:#134E4A}.t59 .cnt{color:#14B8A6}.t59 .bp,.t59 .ps{color:#134E4A}
+.t74 .ch{background:#EFF6FF}.t74 .tag{background:#BFDBFE;color:#1E3A8A}.t74 .cnt{color:#60A5FA}.t74 .bp,.t74 .ps{color:#1E3A8A}
+.t84 .ch{background:#F5F3FF}.t84 .tag{background:#EDE9FE;color:#4C1D95}.t84 .cnt{color:#8B5CF6}.t84 .bp,.t84 .ps{color:#2E1065}
+.t104 .ch{background:#F0FDF4}.t104 .tag{background:#DCFCE7;color:#166534}.t104 .cnt{color:#22C55E}.t104 .bp,.t104 .ps{color:#14532D}
+.t118 .ch{background:#FFF7ED}.t118 .tag{background:#FED7AA;color:#7C2D12}.t118 .cnt{color:#F97316}.t118 .bp,.t118 .ps{color:#7C2D12}
+.t141 .ch{background:#FFF1F2}.t141 .tag{background:#FFE4E6;color:#881337}.t141 .cnt{color:#F43F5E}.t141 .bp,.t141 .ps{color:#881337}
+.t148 .ch{background:#FFFBEB}.t148 .tag{background:#FEF3C7;color:#78350F}.t148 .cnt{color:#F59E0B}.t148 .bp,.t148 .ps{color:#451A03}
+.t208 .ch{background:#F8FAFC}.t208 .tag{background:#E2E8F0;color:#1E293B}.t208 .cnt{color:#64748B}.t208 .bp,.t208 .ps{color:#1E293B}
 table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 td{padding:8px 14px;border-bottom:1px solid #f3f4f6;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 tr:last-child td{border-bottom:none}
@@ -45,25 +44,257 @@ tr:hover td{background:#fafafa}
 .wl{background:#FEF3C7;color:#78350F;font-size:11px;padding:2px 7px;border-radius:999px;display:inline-block}
 .panel{background:#fff;border:1px solid #eee;border-radius:14px;padding:16px;margin-top:10px}
 .panel summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
-.panel-title{font-size:13px;font-weight:600;color:#111}
-.panel-body{margin-top:12px}
-.panel-sub{font-size:12px;color:#999;margin-bottom:12px}
+.ptitle{font-size:13px;font-weight:600;color:#111}
+.pbody{margin-top:12px}
+.psub{font-size:12px;color:#999;margin-bottom:12px}
 .row{display:flex;gap:8px}
 input[type=text]{flex:1;padding:8px 12px;font-size:13px;border:1px solid #ddd;border-radius:8px;outline:none}
 input[type=text]:focus{border-color:#1D9E75}
 button{padding:8px 16px;font-size:13px;font-weight:500;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer}
 button:hover{background:#f3f4f6}
 .msg{font-size:12px;margin-top:8px}
-.msg.ok{color:#059669}.msg.err{color:#DC2626}.msg.ing{color:#8B5CF6}
-.qr-area{background:#f7f8fa;border:1px solid #eee;border-radius:12px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:76px;justify-content:center}
-.qr-ph{font-size:13px;color:#bbb}
+.ok{color:#059669}.err{color:#DC2626}.ing{color:#8B5CF6}
+.qra{background:#f7f8fa;border:1px solid #eee;border-radius:12px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:76px;justify-content:center}
+.qrph{font-size:13px;color:#bbb}
 </style>
 </head>
 <body>
 <div class="wrap">
-
   <div class="header">
     <div class="hico">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <path d="M2 11L11 3L20 11" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <rect x="4" y="11" width="14" height="9" rx="1" stroke="white" stroke-width="1.5
+        <rect x="4" y="11" width="14" height="9" rx="1" stroke="white" stroke-width="1.5"/>
+        <rect x="8.5" y="15" width="2.5" height="5" rx="0.5" fill="white" opacity="0.6"/>
+        <rect x="11.5" y="15" width="2.5" height="5" rx="0.5" fill="white" opacity="0.6"/>
+      </svg>
+    </div>
+    <div>
+      <div class="htitle">화서역 파크푸르지오</div>
+      <div class="hsub">수원시 장안구 · <span id="drange">-</span></div>
+    </div>
+    <span class="badge loading" id="badge">불러오는 중...</span>
+  </div>
+
+  <div class="updated" id="updated"></div>
+  <div class="sec">매매</div>
+  <div class="grid" id="sgrid"></div>
+  <div class="sec">전월세</div>
+  <div class="grid" id="rgrid"></div>
+
+  <details class="panel">
+    <summary><span class="ptitle">실시간 데이터 연동</span><span style="font-size:12px;color:#aaa">▾</span></summary>
+    <div class="pbody">
+      <div class="psub">API 키가 내장되어 자동으로 불러옵니다.</div>
+      <button onclick="loadData()" style="width:100%">데이터 다시 불러오기</button>
+      <div class="msg" id="amsg"></div>
+    </div>
+  </details>
+
+  <div class="panel" style="margin-top:12px">
+    <div class="ptitle" style="margin-bottom:10px">QR 코드 생성</div>
+    <div class="row" style="margin-bottom:10px">
+      <input type="text" id="qu" value="https://mangury.github.io/hwaseo-park-prugio-info/">
+      <button onclick="gqr()">생성</button>
+    </div>
+    <div class="qra">
+      <div class="qrph" id="qrph">생성 버튼을 눌러주세요</div>
+      <div id="qbox"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+const API_KEY = 'c6425e966694d23917ef40d292e3b4f5fa57992dcd8ca0caf40fcf490c1146f2';
+const TODAY = new Date();
+const FROM  = new Date(TODAY);
+FROM.setMonth(FROM.getMonth() - 2);
+
+const ATS = ['59','74','84','104','118','141','148','208'];
+const ALB = {'59':'59㎡','74':'74㎡','84':'84㎡','104':'104㎡','118':'118㎡','141':'141㎡','148':'148㎡','208':'208㎡'};
+const CLS = {'59':'t59','74':'t74','84':'t84','104':'t104','118':'t118','141':'t141','148':'t148','208':'t208'};
+const NAME = '화서역파크푸르지오';
+
+function gt(a) {
+  if (!a || a <= 0) return null;
+  if (a < 65)  return '59';
+  if (a < 80)  return '74';
+  if (a < 90)  return '84';
+  if (a < 112) return '104';
+  if (a < 130) return '118';
+  if (a < 145) return '141';
+  if (a < 175) return '148';
+  return '208';
+}
+function inR(y,m,d) { const t=new Date(y,m-1,d); return t>=FROM && t<=TODAY; }
+function p2(n) { return String(n).padStart(2,'0'); }
+function fdt(dt) { return `${dt.getFullYear()}.${p2(dt.getMonth()+1)}.${p2(dt.getDate())}`; }
+function fd(y,m,d) { return y!==TODAY.getFullYear() ? `${y}.${p2(m)}.${p2(d)}` : `${p2(m)}.${p2(d)}`; }
+function fc(w) {
+  if (!w || isNaN(w)) return '-';
+  const u=Math.floor(w/10000), r=w%10000;
+  if (u>0 && r>0) return u+'억 '+r.toLocaleString()+'만';
+  return u>0 ? u+'억' : r.toLocaleString()+'만';
+}
+function pn(v) {
+  if (v===null || v===undefined) return 0;
+  return parseFloat(String(v).replace(/,/g,'')) || 0;
+}
+function setBadge(s) {
+  const b=document.getElementById('badge');
+  const m={live:['badge live','실시간 데이터'],loading:['badge loading','불러오는 중...'],error:['badge error','오류']};
+  b.className=m[s][0]; b.textContent=m[s][1];
+}
+function noData(c) { return `<tr class="empty"><td colspan="${c}">이 기간 거래 없음</td></tr>`; }
+
+function renderSale(data) {
+  document.getElementById('sgrid').innerHTML = ATS.map(t => {
+    const d = [...data.filter(x=>x.type===t)].sort((a,b)=>(b.y*10000+b.m*100+b.d)-(a.y*10000+a.m*100+a.d));
+    const has = d.length > 0;
+    const rp = has ? fc(d[0].price) : '-';
+    const lo = has && d.length>1 ? fc(Math.min(...d.map(x=>x.price))) : null;
+    const hi = has && d.length>1 ? fc(Math.max(...d.map(x=>x.price))) : null;
+    const arr = has && d.length>1 ? (d[0].price>d[d.length-1].price?' ▲':d[0].price<d[d.length-1].price?' ▼':'') : '';
+    const rows = has ? d.map(x=>`<tr>
+      <td style="width:36%;color:#888">${fd(x.y,x.m,x.d)}</td>
+      <td style="width:46%;text-align:right;font-weight:600">${fc(x.price)}</td>
+      <td style="width:18%;text-align:right;color:#aaa">${x.floor}층</td>
+    </tr>`).join('') : noData(3);
+    return `<div class="card ${CLS[t]}">
+      <div class="ch">
+        <div class="crow"><span class="tag">${ALB[t]}</span><span class="cnt">${has?d.length+'건':'거래없음'}</span></div>
+        <div class="bp">${rp}${arr}</div>
+        <div class="ps">${lo ? lo+' ~ '+hi : '최근 거래가'}</div>
+      </div>
+      <table><tbody>${rows}</tbody></table>
+    </div>`;
+  }).join('');
+}
+
+function renderRent(data) {
+  document.getElementById('rgrid').innerHTML = ATS.map(t => {
+    const d = [...data.filter(x=>x.type===t)].sort((a,b)=>(b.y*10000+b.m*100+b.d)-(a.y*10000+a.m*100+a.d));
+    const has = d.length > 0;
+    const jn = d.filter(x=>x.mon===0).length;
+    const wl = d.filter(x=>x.mon>0).length;
+    const cnt = has ? [jn?`전세 ${jn}건`:'', wl?`월세 ${wl}건`:''].filter(Boolean).join(' · ') : '거래없음';
+    const recent = has ? (d[0].mon>0 ? `${fc(d[0].dep)} / ${d[0].mon}만` : fc(d[0].dep)) : '-';
+    const rows = has ? d.map(x => {
+      const w = x.mon > 0;
+      return `<tr>
+        <td style="width:28%;color:#888">${fd(x.y,x.m,x.d)}</td>
+        <td style="width:18%"><span class="${w?'wl':'jn'}">${w?'월세':'전세'}</span></td>
+        <td style="width:42%;text-align:right;font-weight:600">${w ? fc(x.dep)+' / '+x.mon+'만' : fc(x.dep)}</td>
+        <td style="width:12%;text-align:right;color:#aaa">${x.floor}층</td>
+      </tr>`;
+    }).join('') : noData(4);
+    return `<div class="card ${CLS[t]}">
+      <div class="ch">
+        <div class="crow"><span class="tag">${ALB[t]}</span><span class="cnt">${d.length}건</span></div>
+        <div class="bp" style="font-size:20px">${recent}</div>
+        <div class="ps">${cnt}</div>
+      </div>
+      <table><tbody>${rows}</tbody></table>
+    </div>`;
+  }).join('');
+}
+
+function getMonths() {
+  const months = [];
+  for (let i=0; i<3; i++) {
+    const dt = new Date(TODAY.getFullYear(), TODAY.getMonth()-i, 1);
+    months.push(dt.getFullYear() + p2(dt.getMonth()+1));
+  }
+  return months;
+}
+
+async function fetchOne(type, ym) {
+  const EP = type==='sale'
+    ? 'RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev'
+    : 'RTMSDataSvcAptRent/getRTMSDataSvcAptRent';
+  const target = `https://apis.data.go.kr/1613000/${EP}?serviceKey=${encodeURIComponent(API_KEY)}&LAWD_CD=41111&DEAL_YMD=${ym}&pageNo=1&numOfRows=100&_type=json`;
+  const res = await fetch('https://corsproxy.io/?' + encodeURIComponent(target));
+  const json = await res.json();
+  const raw = json?.response?.body?.items?.item ?? [];
+  return Array.isArray(raw) ? raw : (raw && Object.keys(raw).length>0 ? [raw] : []);
+}
+
+async function loadData() {
+  const msg = document.getElementById('amsg');
+  setBadge('loading');
+  msg.className='msg ing'; msg.textContent='불러오는 중...';
+  try {
+    const months = getMonths();
+    let si=[], ri=[];
+    for (const ym of months) {
+      const [s,r] = await Promise.all([fetchOne('sale',ym), fetchOne('rent',ym)]);
+      si = si.concat(s); ri = ri.concat(r);
+    }
+    const fa = arr => arr.filter(it => (it['아파트']||it['aptNm']||'').replace(/\s/g,'').includes(NAME));
+    const SD = fa(si).map(it => {
+      const area = pn(it['excluUseAr'] || it['전용면적']);
+      return {
+        y: pn(it['dealYear']  || it['년']),
+        m: pn(it['dealMonth'] || it['월']),
+        d: pn(it['dealDay']   || it['일']),
+        area,
+        price: pn(it['dealAmount'] || it['거래금액']),
+        floor: pn(it['floor'] || it['층']),
+        type: gt(area)
+      };
+    }).filter(x => x.price>0 && x.type && inR(x.y,x.m,x.d));
+
+    const RD = fa(ri).map(it => {
+      const area = pn(it['excluUseAr'] || it['전용면적']);
+      return {
+        y: pn(it['contractYear']  || it['년']),
+        m: pn(it['contractMonth'] || it['월']),
+        d: pn(it['contractDay']   || it['일']),
+        area,
+        dep: pn(it['deposit']     || it['보증금액']),
+        mon: pn(it['monthlyRent'] || it['월세금액']),
+        floor: pn(it['floor']     || it['층']),
+        type: gt(area)
+      };
+    }).filter(x => x.dep>0 && x.type && inR(x.y,x.m,x.d));
+
+    setBadge('live');
+    msg.className='msg ok';
+    msg.textContent = `매매 ${SD.length}건 · 전월세 ${RD.length}건 불러오기 완료`;
+    document.getElementById('updated').textContent = `마지막 업데이트: ${fdt(TODAY)}`;
+    renderSale(SD);
+    renderRent(RD);
+  } catch(e) {
+    setBadge('error');
+    msg.className='msg err';
+    msg.textContent = '오류: ' + e.message;
+  }
+}
+
+function gqr() {
+  const url = document.getElementById('qu').value.trim();
+  if (!url) return;
+  document.getElementById('qrph').style.display = 'none';
+  const box = document.getElementById('qbox');
+  box.innerHTML = '';
+  const qd = document.createElement('div');
+  box.appendChild(qd);
+  new QRCode(qd, {text:url, width:180, height:180, correctLevel:QRCode.CorrectLevel.H});
+  setTimeout(() => {
+    const cv = qd.querySelector('canvas');
+    if (cv) {
+      const b = document.createElement('button');
+      b.textContent = 'PNG 다운로드';
+      b.style.marginTop = '4px';
+      b.onclick = () => { const a=document.createElement('a'); a.download='qr_화서역파크푸르지오.png'; a.href=cv.toDataURL(); a.click(); };
+      box.appendChild(b);
+    }
+  }, 300);
+}
+
+document.getElementById('drange').textContent = `${fdt(FROM)} ~ ${fdt(TODAY)}`;
+loadData();
+</script>
+</body>
+</html>
