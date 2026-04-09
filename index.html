@@ -191,7 +191,7 @@ function rSale(){
     const rp=has?fc(d[0].price):'-';
     const lo=has&&d.length>1?fcs(Math.min(...d.map(x=>x.price))):null;
     const hi=has&&d.length>1?fcs(Math.max(...d.map(x=>x.price))):null;
-    const rows=has?d.slice(0,5).map(x=>`<tr>
+    const rows=has?d.map(x=>`<tr>
       <td style="width:38%;color:#888">${fd(x.y,x.m,x.d)}</td>
       <td style="width:44%;text-align:right;font-weight:600">${fc(x.price)}</td>
       <td style="width:18%;text-align:right;color:#aaa">${x.floor}층</td>
@@ -217,7 +217,7 @@ function rRent(){
     const jn=d.filter(x=>x.mon===0).length,wl=d.filter(x=>x.mon>0).length;
     const cnt=[jn?`전세 ${jn}건`:'',wl?`월세 ${wl}건`:''].filter(Boolean).join(' · ')||'거래 없음';
     const recent=has?(d[0].mon>0?`${fcs(d[0].dep)} / ${d[0].mon}만`:fcs(d[0].dep)):'-';
-    const rows=has?d.slice(0,5).map(x=>{const w=x.mon>0;return`<tr>
+    const rows=has?d.map(x=>`<tr>{const w=x.mon>0;return`<tr>
       <td style="width:30%;color:#888">${fd(x.y,x.m,x.d)}</td>
       <td style="width:18%"><span class="${w?'wl':'jn'}">${w?'월세':'전세'}</span></td>
       <td style="width:40%;text-align:right;font-weight:600">${w?fcs(x.dep)+' / '+x.mon+'만':fcs(x.dep)}</td>
@@ -298,10 +298,10 @@ async function fetchAll(){
     }).filter(x=>x.price>0&&inR(x.y,x.m,x.d));
 
     RD=fri.map(it=>{
-      const area=parseFloat(it['전용면적']||it['excluUseAr']||0);
-      const dep=parseInt(String(it['보증금액']||it['deposit']||'0').replace(/,/g,''),10);
+      const area=parseFloat(it['전용면적']||it['excluUseAr']||it['useAr']||0);
+      const dep=parseInt(String(it['보증금액']||it['deposit']||it['보증금']||'0').replace(/,/g,''),10);
       const mon=parseInt(String(it['월세금액']||it['monthlyRent']||'0').replace(/,/g,''),10);
-      const y=parseInt(it['년']||it['contractYear']||0,10),m=parseInt(it['월']||it['contractMonth']||0,10),d=parseInt(it['일']||it['contractDay']||0,10);
+      const y=parseInt(it['년']||it['contractYear']||it['dealYear']||0,10),m=parseInt(it['월']||it['contractMonth']||it['dealMonth']||0,10),d=parseInt(it['일']||it['contractDay']||it['dealDay']||0,10);
       return{y,m,d,area,dep,mon,floor:parseInt(it['층']||it['floor']||0,10),type:gt(area)};
     }).filter(x=>x.dep>0&&inR(x.y,x.m,x.d));
 
