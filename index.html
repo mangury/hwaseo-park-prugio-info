@@ -16,17 +16,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .badge.live{background:#D1FAE5;color:#065F46}
 .badge.loading{background:#EDE9FE;color:#4C1D95}
 .badge.error{background:#FEE2E2;color:#991B1B}
-.updated{font-size:11px;color:#ccc;text-align:right;margin-bottom:8px}
+.updated{font-size:13px;color:#ccc;text-align:right;margin-bottom:8px}
 .sec{font-size:16px;font-weight:600;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid #e5e7eb}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:32px}
 @media(max-width:480px){.grid{grid-template-columns:1fr}}
 .card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #eee}
 .ch{padding:14px 16px 12px}
 .crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
-.tag{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
-.cnt{font-size:12px}
-.bp{font-size:22px;font-weight:700;line-height:1}
-.ps{font-size:11px;margin-top:6px;opacity:.75}
+.tag{font-size:14px;font-weight:600;padding:4px 12px;border-radius:999px}
+.cnt{font-size:14px}
+.bp{font-size:26px;font-weight:700;line-height:1}
+.ps{font-size:13px;margin-top:6px;opacity:.75}
 .t59 .ch{background:#F0FDFA}.t59 .tag{background:#CCFBF1;color:#134E4A}.t59 .cnt{color:#14B8A6}.t59 .bp,.t59 .ps{color:#134E4A}
 .t74 .ch{background:#EFF6FF}.t74 .tag{background:#BFDBFE;color:#1E3A8A}.t74 .cnt{color:#60A5FA}.t74 .bp,.t74 .ps{color:#1E3A8A}
 .t84 .ch{background:#F5F3FF}.t84 .tag{background:#EDE9FE;color:#4C1D95}.t84 .cnt{color:#8B5CF6}.t84 .bp,.t84 .ps{color:#2E1065}
@@ -55,6 +55,7 @@ button:hover{background:#f3f4f6}
 </head>
 <body>
 <div class="wrap">
+
   <div class="header">
     <div class="hico">
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
@@ -77,7 +78,7 @@ button:hover{background:#f3f4f6}
   <div class="sec">전월세</div>
   <div class="grid" id="rgrid"></div>
 
-  <!-- QR코드 생성 섹션 (필요시 주석 해제)
+  <!-- QR코드 생성 섹션 (필요시 아래 주석 해제)
   <div class="panel">
     <div class="ptitle">QR 코드 생성</div>
     <div class="row" style="margin-bottom:10px">
@@ -90,11 +91,22 @@ button:hover{background:#f3f4f6}
     </div>
   </div>
   -->
+
+  <div style="margin-top:32px;padding:16px 20px;background:#f1f5f9;border-radius:14px;border:1px solid #e2e8f0">
+    <div style="font-size:14px;font-weight:600;color:#475569;margin-bottom:12px">[ 참고사항 ]</div>
+    <ol style="padding-left:18px;display:flex;flex-direction:column;gap:8px">
+      <li style="font-size:13px;color:#64748B;line-height:1.7">본 자료는 국토교통부 실거래가 공개시스템에 신고된 실거래 사실을 그대로 옮긴 객관적 사실 정보입니다.</li>
+      <li style="font-size:13px;color:#64748B;line-height:1.7">실거래가는 동, 층, 향, 내부 상태 등에 따라 차이가 발생할 수 있으며, 본 자료는 참고용 자료로 실제 거래 가격 판단 및 거래에 대한 책임은 개별 당사자에게 있습니다.</li>
+      <li style="font-size:13px;color:#64748B;line-height:1.7">본 자료는 시세 판단이나 향후 가격 변동에 대한 예측 자료가 아닙니다.</li>
+      <li style="font-size:13px;color:#64748B;line-height:1.7">토지거래허가 절차로 인해 최근 체결된 거래금액과 실거래가 공개 시점 사이에 차이가 발생할 수 있음을 참고 바랍니다.</li>
+    </ol>
+  </div>
+
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-const API_KEY = 'c6425e966694d23917ef40d292e3b4f5fa57992dcd8ca0caf40fcf490c1146f2';
+const API_KEY = 'YOUR_API_KEY_HERE';
 const TODAY = new Date();
 const FROM  = new Date(TODAY);
 FROM.setMonth(FROM.getMonth() - 2);
@@ -202,7 +214,10 @@ async function fetchOne(type,ym){
   const res=await fetch('https://corsproxy.io/?'+encodeURIComponent(target));
   const json=await res.json();
   const raw=json?.response?.body?.items?.item??[];
-  return Array.isArray(raw)?raw:(raw&&Object.keys(raw).length>0?[raw]:[]);
+  const items=Array.isArray(raw)?raw:(raw&&Object.keys(raw).length>0?[raw]:[]);
+  const y=parseInt(ym.substring(0,4),10);
+  const m=parseInt(ym.substring(4,6),10);
+  return items.map(it=>({...it,_y:y,_m:m}));
 }
 
 async function loadData(){
@@ -232,9 +247,9 @@ async function loadData(){
     const RD=fa(ri).map(it=>{
       const area=pn(it['excluUseAr']||it['전용면적']);
       return{
-        y:pn(it['년']||it['contractYear']),
-        m:pn(it['월']||it['contractMonth']),
-        d:pn(it['일']||it['contractDay']),
+        y:it._y,
+        m:it._m,
+        d:pn(it['일']||it['contractDay']||it['dealDay']),
         area,
         dep:pn(it['보증금액']||it['deposit']),
         mon:pn(it['월세금액']||it['monthlyRent']),
@@ -253,6 +268,7 @@ async function loadData(){
   }
 }
 
+// QR코드 생성 함수 (QR 섹션 주석 해제 시 함께 사용)
 function gqr(){
   const url=document.getElementById('qu').value.trim();if(!url)return;
   document.getElementById('qrph').style.display='none';
