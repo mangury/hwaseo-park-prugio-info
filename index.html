@@ -139,6 +139,7 @@ const CLS  = {'84':'t84','104':'t104','118':'t118','141':'t141','148':'t148','20
 const NAME = '화서역파크푸르지오';
 
 function gt(a){
+if(!a||a<=0) return null;
   if(a<90)  return '84';
   if(a<112) return '104';
   if(a<130) return '118';
@@ -250,21 +251,21 @@ async function loadData(){
       y:pi(it['년']||it['dealYear']),
       m:pi(it['월']||it['dealMonth']),
       d:pi(it['일']||it['dealDay']),
-      area:pf(it['전용면적']||it['excluUseAr']),
+      area:pf(it['전용면적']||it['excluUseAr']||it['전용면적(㎡)']||it['useAr']||0),
       price:pi(it['거래금액']||it['dealAmount']),
       floor:pi(it['층']||it['floor']),
       type:gt(pf(it['전용면적']||it['excluUseAr']))
-    })).filter(x=>x.price>0&&inR(x.y,x.m,x.d));
+    })).filter(x=>x.price>0&&x.type&&inR(x.y,x.m,x.d));
     const RD=fa(ri).map(it=>({
       y:pi(it['년']||it['contractYear']||it['dealYear']),
       m:pi(it['월']||it['contractMonth']||it['dealMonth']),
       d:pi(it['일']||it['contractDay']||it['dealDay']),
-      area:pf(it['전용면적']||it['excluUseAr']),
+      area:pf(it['전용면적']||it['excluUseAr']||it['전용면적(㎡)']||it['useAr']||0),
       dep:pi(it['보증금액']||it['deposit']||it['보증금']),
       mon:pi(it['월세금액']||it['monthlyRent']||it['월세']),
       floor:pi(it['층']||it['floor']),
       type:gt(pf(it['전용면적']||it['excluUseAr']))
-    })).filter(x=>x.dep>0&&inR(x.y,x.m,x.d));
+    })).filter(x=>x.dep>0&&x.type&&inR(x.y,x.m,x.d));
     setBadge('live');
     msg.className='msg ok';
     msg.textContent=`매매 ${SD.length}건 · 전월세 ${RD.length}건 불러오기 완료`;
