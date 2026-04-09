@@ -247,14 +247,14 @@ async function loadData() {
 
     const RD = fa(ri).map(it => {
       const area = pn(it['excluUseAr'] || it['전용면적']);
+      const y = pn(it['년'] || it['contractYear'] || it['dealYear']);
+      const m = pn(it['월'] || it['contractMonth'] || it['dealMonth']);
+      const d = pn(it['일'] || it['contractDay'] || it['dealDay']);
       return {
-        y: pn(it['contractYear']  || it['년']),
-        m: pn(it['contractMonth'] || it['월']),
-        d: pn(it['contractDay']   || it['일']),
-        area,
-        dep: pn(it['deposit']     || it['보증금액']),
-        mon: pn(it['monthlyRent'] || it['월세금액']),
-        floor: pn(it['floor']     || it['층']),
+        y, m, d, area,
+        dep: pn(it['보증금액'] || it['deposit']),
+        mon: pn(it['월세금액'] || it['monthlyRent']),
+        floor: pn(it['층'] || it['floor']),
         type: gt(area)
       };
     }).filter(x => x.dep>0 && x.type && inR(x.y,x.m,x.d));
