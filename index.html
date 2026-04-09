@@ -10,14 +10,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .wrap{max-width:720px;margin:0 auto;padding:20px 16px 60px}
 .header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
 .hico{width:46px;height:46px;background:#1D9E75;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.htitle{font-size:18px;font-weight:600;color:#111}
-.hsub{font-size:12px;color:#888;margin-top:3px}
+.htitle{font-size:22px;font-weight:600;color:#111}
+.hsub{font-size:14px;color:#888;margin-top:3px}
 .badge{font-size:11px;padding:3px 10px;border-radius:999px;white-space:nowrap;margin-left:auto}
 .badge.live{background:#D1FAE5;color:#065F46}
 .badge.loading{background:#EDE9FE;color:#4C1D95}
 .badge.error{background:#FEE2E2;color:#991B1B}
 .updated{font-size:11px;color:#ccc;text-align:right;margin-bottom:8px}
-.sec{font-size:13px;font-weight:600;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid #e5e7eb}
+.sec{font-size:16px;font-weight:600;color:#555;margin-bottom:10px;padding-bottom:8px;border-bottom:1.5px solid #e5e7eb}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:32px}
 @media(max-width:480px){.grid{grid-template-columns:1fr}}
 .card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #eee}
@@ -35,25 +35,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .t141 .ch{background:#FFF1F2}.t141 .tag{background:#FFE4E6;color:#881337}.t141 .cnt{color:#F43F5E}.t141 .bp,.t141 .ps{color:#881337}
 .t148 .ch{background:#FFFBEB}.t148 .tag{background:#FEF3C7;color:#78350F}.t148 .cnt{color:#F59E0B}.t148 .bp,.t148 .ps{color:#451A03}
 .t208 .ch{background:#F8FAFC}.t208 .tag{background:#E2E8F0;color:#1E293B}.t208 .cnt{color:#64748B}.t208 .bp,.t208 .ps{color:#1E293B}
-table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
-td{padding:8px 14px;border-bottom:1px solid #f3f4f6;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+table{width:100%;border-collapse:collapse;font-size:14px;table-layout:fixed}
+td{padding:10px 14px;border-bottom:1px solid #f3f4f6;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#fafafa}
 .empty td{padding:18px;text-align:center;color:#aaa}
-.jn{background:#DBEAFE;color:#1E40AF;font-size:11px;padding:2px 7px;border-radius:999px;display:inline-block}
-.wl{background:#FEF3C7;color:#78350F;font-size:11px;padding:2px 7px;border-radius:999px;display:inline-block}
+.jn{background:#DBEAFE;color:#1E40AF;font-size:13px;padding:3px 8px;border-radius:999px;display:inline-block}
+.wl{background:#FEF3C7;color:#78350F;font-size:13px;padding:3px 8px;border-radius:999px;display:inline-block}
 .panel{background:#fff;border:1px solid #eee;border-radius:14px;padding:16px;margin-top:10px}
-.panel summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
-.ptitle{font-size:13px;font-weight:600;color:#111}
-.pbody{margin-top:12px}
-.psub{font-size:12px;color:#999;margin-bottom:12px}
+.ptitle{font-size:13px;font-weight:600;color:#111;margin-bottom:10px}
 .row{display:flex;gap:8px}
 input[type=text]{flex:1;padding:8px 12px;font-size:13px;border:1px solid #ddd;border-radius:8px;outline:none}
 input[type=text]:focus{border-color:#1D9E75}
 button{padding:8px 16px;font-size:13px;font-weight:500;border:1px solid #ccc;border-radius:8px;background:#fff;cursor:pointer}
 button:hover{background:#f3f4f6}
-.msg{font-size:12px;margin-top:8px}
-.ok{color:#059669}.err{color:#DC2626}.ing{color:#8B5CF6}
 .qra{background:#f7f8fa;border:1px solid #eee;border-radius:12px;padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;min-height:76px;justify-content:center}
 .qrph{font-size:13px;color:#bbb}
 </style>
@@ -82,9 +77,8 @@ button:hover{background:#f3f4f6}
   <div class="sec">전월세</div>
   <div class="grid" id="rgrid"></div>
 
-<!-- QR코드 생성 섹션 (필요시 주석 해제)
-  <div class="panel" style="margin-top:12px">
-    <div class="ptitle" style="margin-bottom:10px">QR 코드 생성</div>
+  <div class="panel">
+    <div class="ptitle">QR 코드 생성</div>
     <div class="row" style="margin-bottom:10px">
       <input type="text" id="qu" value="https://mangury.github.io/hwaseo-park-prugio-info/">
       <button onclick="gqr()">생성</button>
@@ -95,7 +89,6 @@ button:hover{background:#f3f4f6}
     </div>
   </div>
 </div>
-  -->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
@@ -109,80 +102,77 @@ const ALB = {'59':'59㎡','74':'74㎡','84':'84㎡','104':'104㎡','118':'118㎡
 const CLS = {'59':'t59','74':'t74','84':'t84','104':'t104','118':'t118','141':'t141','148':'t148','208':'t208'};
 const NAME = '화서역파크푸르지오';
 
-function gt(a) {
-  if (!a || a <= 0) return null;
-  if (a < 65)  return '59';
-  if (a < 80)  return '74';
-  if (a < 90)  return '84';
-  if (a < 112) return '104';
-  if (a < 130) return '118';
-  if (a < 145) return '141';
-  if (a < 175) return '148';
+function gt(a){
+  if(!a||a<=0) return null;
+  if(a<65)  return '59';
+  if(a<80)  return '74';
+  if(a<90)  return '84';
+  if(a<112) return '104';
+  if(a<130) return '118';
+  if(a<145) return '141';
+  if(a<175) return '148';
   return '208';
 }
-function inR(y,m,d) { const t=new Date(y,m-1,d); return t>=FROM && t<=TODAY; }
-function p2(n) { return String(n).padStart(2,'0'); }
-function fdt(dt) { return `${dt.getFullYear()}.${p2(dt.getMonth()+1)}.${p2(dt.getDate())}`; }
-function fd(y,m,d) { return y!==TODAY.getFullYear() ? `${y}.${p2(m)}.${p2(d)}` : `${p2(m)}.${p2(d)}`; }
-function fc(w) {
-  if (!w || isNaN(w)) return '-';
-  const u=Math.floor(w/10000), r=w%10000;
-  if (u>0 && r>0) return u+'억 '+r.toLocaleString()+'만';
-  return u>0 ? u+'억' : r.toLocaleString()+'만';
+function inR(y,m,d){const t=new Date(y,m-1,d);return t>=FROM&&t<=TODAY;}
+function p2(n){return String(n).padStart(2,'0');}
+function fdt(dt){return`${dt.getFullYear()}.${p2(dt.getMonth()+1)}.${p2(dt.getDate())}`;}
+function fd(y,m,d){return y!==TODAY.getFullYear()?`${y}.${p2(m)}.${p2(d)}`:`${p2(m)}.${p2(d)}`;}
+function fc(w){
+  if(!w||isNaN(w))return'-';
+  const u=Math.floor(w/10000),r=w%10000;
+  if(u>0&&r>0)return u+'억 '+r.toLocaleString()+'만';
+  return u>0?u+'억':r.toLocaleString()+'만';
 }
-function pn(v) {
-  if (v===null || v===undefined) return 0;
-  return parseFloat(String(v).replace(/,/g,'')) || 0;
+function pn(v){
+  if(v===null||v===undefined)return 0;
+  return parseFloat(String(v).replace(/,/g,''))||0;
 }
-function setBadge(s) {
+function setBadge(s){
   const b=document.getElementById('badge');
   const m={live:['badge live','실시간 데이터'],loading:['badge loading','불러오는 중...'],error:['badge error','오류']};
-  b.className=m[s][0]; b.textContent=m[s][1];
+  b.className=m[s][0];b.textContent=m[s][1];
 }
-function noData(c) { return `<tr class="empty"><td colspan="${c}">이 기간 거래 없음</td></tr>`; }
+function noData(c){return`<tr class="empty"><td colspan="${c}">이 기간 거래 없음</td></tr>`;}
 
-function renderSale(data) {
-  document.getElementById('sgrid').innerHTML = ATS.map(t => {
-    const d = [...data.filter(x=>x.type===t)].sort((a,b)=>(b.y*10000+b.m*100+b.d)-(a.y*10000+a.m*100+a.d));
-    const has = d.length > 0;
-    const rp = has ? fc(d[0].price) : '-';
-    const lo = has && d.length>1 ? fc(Math.min(...d.map(x=>x.price))) : null;
-    const hi = has && d.length>1 ? fc(Math.max(...d.map(x=>x.price))) : null;
-    const arr = has && d.length>1 ? (d[0].price>d[d.length-1].price?' ▲':d[0].price<d[d.length-1].price?' ▼':'') : '';
-    const rows = has ? d.map(x=>`<tr>
+function renderSale(data){
+  document.getElementById('sgrid').innerHTML=ATS.map(t=>{
+    const d=[...data.filter(x=>x.type===t)].sort((a,b)=>(b.y*10000+b.m*100+b.d)-(a.y*10000+a.m*100+a.d));
+    const has=d.length>0;
+    const rp=has?fc(d[0].price):'-';
+    const lo=has&&d.length>1?fc(Math.min(...d.map(x=>x.price))):null;
+    const hi=has&&d.length>1?fc(Math.max(...d.map(x=>x.price))):null;
+    const arr=has&&d.length>1?(d[0].price>d[d.length-1].price?' ▲':d[0].price<d[d.length-1].price?' ▼':''):'';
+    const rows=has?d.map(x=>`<tr>
       <td style="width:36%;color:#888">${fd(x.y,x.m,x.d)}</td>
       <td style="width:46%;text-align:right;font-weight:600">${fc(x.price)}</td>
       <td style="width:18%;text-align:right;color:#aaa">${x.floor}층</td>
-    </tr>`).join('') : noData(3);
-    return `<div class="card ${CLS[t]}">
+    </tr>`).join(''):noData(3);
+    return`<div class="card ${CLS[t]}">
       <div class="ch">
         <div class="crow"><span class="tag">${ALB[t]}</span><span class="cnt">${has?d.length+'건':'거래없음'}</span></div>
         <div class="bp">${rp}${arr}</div>
-        <div class="ps">${lo ? lo+' ~ '+hi : '최근 거래가'}</div>
+        <div class="ps">${lo?lo+' ~ '+hi:'최근 거래가'}</div>
       </div>
       <table><tbody>${rows}</tbody></table>
     </div>`;
   }).join('');
 }
 
-function renderRent(data) {
-  document.getElementById('rgrid').innerHTML = ATS.map(t => {
-    const d = [...data.filter(x=>x.type===t)].sort((a,b)=>(b.y*10000+b.m*100+b.d)-(a.y*10000+a.m*100+a.d));
-    const has = d.length > 0;
-    const jn = d.filter(x=>x.mon===0).length;
-    const wl = d.filter(x=>x.mon>0).length;
-    const cnt = has ? [jn?`전세 ${jn}건`:'', wl?`월세 ${wl}건`:''].filter(Boolean).join(' · ') : '거래없음';
-    const recent = has ? (d[0].mon>0 ? `${fc(d[0].dep)} / ${d[0].mon}만` : fc(d[0].dep)) : '-';
-    const rows = has ? d.map(x => {
-      const w = x.mon > 0;
-      return `<tr>
-        <td style="width:28%;color:#888">${fd(x.y,x.m,x.d)}</td>
-        <td style="width:18%"><span class="${w?'wl':'jn'}">${w?'월세':'전세'}</span></td>
-        <td style="width:42%;text-align:right;font-weight:600">${w ? fc(x.dep)+' / '+x.mon+'만' : fc(x.dep)}</td>
-        <td style="width:12%;text-align:right;color:#aaa">${x.floor}층</td>
-      </tr>`;
-    }).join('') : noData(4);
-    return `<div class="card ${CLS[t]}">
+function renderRent(data){
+  document.getElementById('rgrid').innerHTML=ATS.map(t=>{
+    const d=[...data.filter(x=>x.type===t)].sort((a,b)=>(b.y*10000+b.m*100+b.d)-(a.y*10000+a.m*100+a.d));
+    const has=d.length>0;
+    const jn=d.filter(x=>x.mon===0).length;
+    const wl=d.filter(x=>x.mon>0).length;
+    const cnt=has?[jn?`전세 ${jn}건`:'',wl?`월세 ${wl}건`:''].filter(Boolean).join(' · '):'거래없음';
+    const recent=has?(d[0].mon>0?`${fc(d[0].dep)} / ${d[0].mon}만`:fc(d[0].dep)):'-';
+    const rows=has?d.map(x=>{const w=x.mon>0;return`<tr>
+      <td style="width:28%;color:#888">${fd(x.y,x.m,x.d)}</td>
+      <td style="width:18%"><span class="${w?'wl':'jn'}">${w?'월세':'전세'}</span></td>
+      <td style="width:42%;text-align:right;font-weight:600">${w?fc(x.dep)+' / '+x.mon+'만':fc(x.dep)}</td>
+      <td style="width:12%;text-align:right;color:#aaa">${x.floor}층</td>
+    </tr>`;}).join(''):noData(4);
+    return`<div class="card ${CLS[t]}">
       <div class="ch">
         <div class="crow"><span class="tag">${ALB[t]}</span><span class="cnt">${d.length}건</span></div>
         <div class="bp" style="font-size:20px">${recent}</div>
@@ -193,96 +183,92 @@ function renderRent(data) {
   }).join('');
 }
 
-function getMonths() {
-  const months = [];
-  for (let i=0; i<3; i++) {
-    const dt = new Date(TODAY.getFullYear(), TODAY.getMonth()-i, 1);
-    months.push(dt.getFullYear() + p2(dt.getMonth()+1));
+function getMonths(){
+  const months=[];
+  for(let i=0;i<3;i++){
+    const dt=new Date(TODAY.getFullYear(),TODAY.getMonth()-i,1);
+    months.push(dt.getFullYear()+p2(dt.getMonth()+1));
   }
   return months;
 }
 
-async function fetchOne(type, ym) {
-  const EP = type==='sale'
-    ? 'RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev'
-    : 'RTMSDataSvcAptRent/getRTMSDataSvcAptRent';
-  const target = `https://apis.data.go.kr/1613000/${EP}?serviceKey=${encodeURIComponent(API_KEY)}&LAWD_CD=41111&DEAL_YMD=${ym}&pageNo=1&numOfRows=100&_type=json`;
-  const res = await fetch('https://corsproxy.io/?' + encodeURIComponent(target));
-  const json = await res.json();
-  const raw = json?.response?.body?.items?.item ?? [];
-  return Array.isArray(raw) ? raw : (raw && Object.keys(raw).length>0 ? [raw] : []);
+async function fetchOne(type,ym){
+  const EP=type==='sale'
+    ?'RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev'
+    :'RTMSDataSvcAptRent/getRTMSDataSvcAptRent';
+  const target=`https://apis.data.go.kr/1613000/${EP}?serviceKey=${encodeURIComponent(API_KEY)}&LAWD_CD=41111&DEAL_YMD=${ym}&pageNo=1&numOfRows=100&_type=json`;
+  const res=await fetch('https://corsproxy.io/?'+encodeURIComponent(target));
+  const json=await res.json();
+  const raw=json?.response?.body?.items?.item??[];
+  return Array.isArray(raw)?raw:(raw&&Object.keys(raw).length>0?[raw]:[]);
 }
 
-async function loadData() {
+async function loadData(){
   setBadge('loading');
-  try {
-    const months = getMonths();
-    let si=[], ri=[];
-    for (const ym of months) {
-      const [s,r] = await Promise.all([fetchOne('sale',ym), fetchOne('rent',ym)]);
-      si = si.concat(s); ri = ri.concat(r);
+  try{
+    const months=getMonths();
+    let si=[],ri=[];
+    for(const ym of months){
+      const[s,r]=await Promise.all([fetchOne('sale',ym),fetchOne('rent',ym)]);
+      si=si.concat(s);ri=ri.concat(r);
     }
-    const fa = arr => arr.filter(it => (it['아파트']||it['aptNm']||'').replace(/\s/g,'').includes(NAME));
-    const SD = fa(si).map(it => {
-      const area = pn(it['excluUseAr'] || it['전용면적']);
-      return {
-        y: pn(it['dealYear']  || it['년']),
-        m: pn(it['dealMonth'] || it['월']),
-        d: pn(it['dealDay']   || it['일']),
-        area,
-        price: pn(it['dealAmount'] || it['거래금액']),
-        floor: pn(it['floor'] || it['층']),
-        type: gt(area)
-      };
-    }).filter(x => x.price>0 && x.type && inR(x.y,x.m,x.d));
+    const fa=arr=>arr.filter(it=>(it['아파트']||it['aptNm']||'').replace(/\s/g,'').includes(NAME));
 
-    const RD = fa(ri).map(it => {
-      const area = pn(it['excluUseAr'] || it['전용면적']);
-      const y = pn(it['년'] || it['contractYear'] || it['dealYear']);
-      const m = pn(it['월'] || it['contractMonth'] || it['dealMonth']);
-      const d = pn(it['일'] || it['contractDay'] || it['dealDay']);
-      return {
-        y, m, d, area,
-        dep: pn(it['보증금액'] || it['deposit']),
-        mon: pn(it['월세금액'] || it['monthlyRent']),
-        floor: pn(it['층'] || it['floor']),
-        type: gt(area)
+    const SD=fa(si).map(it=>{
+      const area=pn(it['excluUseAr']||it['전용면적']);
+      return{
+        y:pn(it['dealYear']||it['년']),
+        m:pn(it['dealMonth']||it['월']),
+        d:pn(it['dealDay']||it['일']),
+        area,
+        price:pn(it['dealAmount']||it['거래금액']),
+        floor:pn(it['floor']||it['층']),
+        type:gt(area)
       };
-    }).filter(x => x.dep>0 && x.type && inR(x.y,x.m,x.d));
+    }).filter(x=>x.price>0&&x.type&&inR(x.y,x.m,x.d));
+
+    const RD=fa(ri).map(it=>{
+      const area=pn(it['excluUseAr']||it['전용면적']);
+      return{
+        y:pn(it['년']||it['contractYear']),
+        m:pn(it['월']||it['contractMonth']),
+        d:pn(it['일']||it['contractDay']),
+        area,
+        dep:pn(it['보증금액']||it['deposit']),
+        mon:pn(it['월세금액']||it['monthlyRent']),
+        floor:pn(it['층']||it['floor']),
+        type:gt(area)
+      };
+    }).filter(x=>x.dep>0&&x.type&&inR(x.y,x.m,x.d));
 
     setBadge('live');
-    
-    document.getElementById('updated').textContent = `마지막 업데이트: ${fdt(TODAY)}`;
+    document.getElementById('updated').textContent=`마지막 업데이트: ${fdt(TODAY)}`;
     renderSale(SD);
     renderRent(RD);
-  } catch(e) {
+  }catch(e){
     setBadge('error');
-    
+    console.error(e);
   }
 }
 
-function gqr() {
-  const url = document.getElementById('qu').value.trim();
-  if (!url) return;
-  document.getElementById('qrph').style.display = 'none';
-  const box = document.getElementById('qbox');
-  box.innerHTML = '';
-  const qd = document.createElement('div');
-  box.appendChild(qd);
-  new QRCode(qd, {text:url, width:180, height:180, correctLevel:QRCode.CorrectLevel.H});
-  setTimeout(() => {
-    const cv = qd.querySelector('canvas');
-    if (cv) {
-      const b = document.createElement('button');
-      b.textContent = 'PNG 다운로드';
-      b.style.marginTop = '4px';
-      b.onclick = () => { const a=document.createElement('a'); a.download='qr_화서역파크푸르지오.png'; a.href=cv.toDataURL(); a.click(); };
+function gqr(){
+  const url=document.getElementById('qu').value.trim();if(!url)return;
+  document.getElementById('qrph').style.display='none';
+  const box=document.getElementById('qbox');box.innerHTML='';
+  const qd=document.createElement('div');box.appendChild(qd);
+  new QRCode(qd,{text:url,width:180,height:180,correctLevel:QRCode.CorrectLevel.H});
+  setTimeout(()=>{
+    const cv=qd.querySelector('canvas');
+    if(cv){
+      const b=document.createElement('button');
+      b.textContent='PNG 다운로드';b.style.marginTop='4px';
+      b.onclick=()=>{const a=document.createElement('a');a.download='qr_화서역파크푸르지오.png';a.href=cv.toDataURL();a.click();};
       box.appendChild(b);
     }
-  }, 300);
+  },300);
 }
 
-document.getElementById('drange').textContent = `${fdt(FROM)} ~ ${fdt(TODAY)}`;
+document.getElementById('drange').textContent=`${fdt(FROM)} ~ ${fdt(TODAY)}`;
 loadData();
 </script>
 </body>
