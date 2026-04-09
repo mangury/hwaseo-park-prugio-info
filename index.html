@@ -251,7 +251,7 @@ async function loadData(){
       y:pi(it['년']||it['dealYear']),
       m:pi(it['월']||it['dealMonth']),
       d:pi(it['일']||it['dealDay']),
-      area:pf(it['전용면적']||it['excluUseAr']||it['전용면적(㎡)']||it['useAr']||0),
+      area:pf(it['excluUseAr']||it['전용면적']||it['전용면적(㎡)']||it['useAr']||0),
       price:pi(it['거래금액']||it['dealAmount']),
       floor:pi(it['층']||it['floor']),
       type:gt(pf(it['전용면적']||it['excluUseAr']))
@@ -260,7 +260,7 @@ async function loadData(){
       y:pi(it['년']||it['contractYear']||it['dealYear']),
       m:pi(it['월']||it['contractMonth']||it['dealMonth']),
       d:pi(it['일']||it['contractDay']||it['dealDay']),
-      area:pf(it['전용면적']||it['excluUseAr']||it['전용면적(㎡)']||it['useAr']||0),
+      area:pf(it['excluUseAr']||it['전용면적']||it['전용면적(㎡)']||it['useAr']||0),
       dep:pi(it['보증금액']||it['deposit']||it['보증금']),
       mon:pi(it['월세금액']||it['monthlyRent']||it['월세']),
       floor:pi(it['층']||it['floor']),
