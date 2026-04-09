@@ -267,30 +267,53 @@ async function fetchAll(){
   const msg=document.getElementById('amsg');
   msg.style.display='block';
   setBadge('loading');
-  msg.className='msg ing';msg.textContent='데이터를 불러오는 중입니다...';
+  msg.className='msg ing';msg.textContent='불러오는 중...';
   const months=getMonths();
-  const NAME='화서역파크푸르지오';
   try{
     let si=[],ri=[];
     for(const ym of months){
       const [s,r]=await Promise.all([callApi('sale',ym),callApi('rent',ym)]);
       si=si.concat(s);ri=ri.concat(r);
     }
-    const fa=arr=>arr.filter(it=>(it['아파트']||'').replace(/\s/g,'').includes(NAME));
-    SD=fa(si).map(it=>{
-      const area=parseFloat(it['전용면적']||0),price=parseInt((it['거래금액']||'0').replace(/,/g,''),10);
-      const y=parseInt(it['년']||0,10),m=parseInt(it['월']||0,10),d=parseInt(it['일']||0,10);
-      return{y,m,d,area,price,floor:parseInt(it['층']||0,10),type:gt(area)};
+
+    msg.textContent=`① API 응답: 매매 ${si.length}건 / 전월세 ${ri.length}건`;
+
+    if(si.length>0){
+      const sample=si[0];
+      const nm=sample['아파트']||sample['aptNm']||'(이름없음)';
+      msg.textContent+=` | 샘플 아파트명: "${nm}"`;
+    }
+
+    const NAME='화서역파크푸르지오';
+    const fa=arr=>arr.filter(it=>(it['아파트']||it['aptNm']||'').replace(/\s/g,'').includes(NAME));
+    const fsi=fa(si), fri=fa(ri);
+
+    msg.textContent+=` | ② 필터 후: 매매 ${fsi.length}건 / 전월세 ${fri.length}건`;
+
+    SD=fsi.map(it=>{
+      const area=parseFloat(it['전용면적']||it['excluUseAr']||0);
+      const price=parseInt((it['거래금액']||it['dealAmount']||'0').replace(/,/g,''),10);
+      const y=parseInt(it['년']||it['dealYear']||0,10),m=parseInt(it['월']||it['dealMonth']||0,10),d=parseInt(it['일']||it['dealDay']||0,10);
+      return{y,m,d,area,price,floor:parseInt(it['층']||it['floor']||0,10),type:gt(area)};
     }).filter(x=>x.price>0&&inR(x.y,x.m,x.d));
-    RD=fa(ri).map(it=>{
-      const area=parseFloat(it['전용면적']||0),dep=parseInt((it['보증금액']||'0').replace(/,/g,''),10),mon=parseInt((it['월세금액']||'0').replace(/,/g,''),10);
-      const y=parseInt(it['년']||0,10),m=parseInt(it['월']||0,10),d=parseInt(it['일']||0,10);
-      return{y,m,d,area,dep,mon,floor:parseInt(it['층']||0,10),type:gt(area)};
+
+    RD=fri.map(it=>{
+      const area=parseFloat(it['전용면적']||it['excluUseAr']||0);
+      const dep=parseInt((it['보증금액']||it['deposit']||'0').replace(/,/g,''),10);
+      const mon=parseInt((it['월세금액']||it['monthlyRent']||'0').replace(/,/g,''),10);
+      const y=parseInt(it['년']||it['contractYear']||0,10),m=parseInt(it['월']||it['contractMonth']||0,10),d=parseInt(it['일']||it['contractDay']||0,10);
+      return{y,m,d,area,dep,mon,floor:parseInt(it['층']||it['floor']||0,10),type:gt(area)};
     }).filter(x=>x.dep>0&&inR(x.y,x.m,x.d));
-    setBadge('live');
-    msg.className='msg ok';msg.textContent=`매매 ${SD.length}건 · 전월세 ${RD.length}건 불러오기 완료`;
-    document.getElementById('updated').textContent=`마지막 업데이트: ${fdt(TODAY)}`;
-    rSale();rRent();
+
+    msg.textContent+=` | ③ 날짜 필터 후: 매매 ${SD.length}건 / 전월세 ${RD.length}건`;
+
+    if(SD.length>0||RD.length>0){
+      setBadge('live');
+      document.getElementById('updated').textContent=`마지막 업데이트: ${fdt(TODAY)}`;
+      rSale();rRent();
+    } else {
+      setBadge('error');
+    }
   }catch(e){
     setBadge('error');
     msg.className='msg err';msg.textContent='오류: '+e.message;
