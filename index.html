@@ -252,7 +252,7 @@ function getMonths(){
 }
 
 async function callApi(type, ym) {
-  const PROXY = 'https://corsproxy.io/?';
+  const PROXY = 'https://api.allorigins.win/raw?url=';
   const EP = type==='sale'
     ? 'RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev'
     : 'RTMSDataSvcAptRent/getRTMSDataSvcAptRent';
