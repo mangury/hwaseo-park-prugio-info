@@ -269,6 +269,7 @@ async function fetchAll(){
   setBadge('loading');
   msg.className='msg ing';msg.textContent='데이터를 불러오는 중입니다...';
   const months=getMonths();
+ console.log('매매 샘플:', si[0], '전월세 샘플:', ri[0]);
   const NAME='화서역파크푸르지오';
   try{
     let si=[],ri=[];
