@@ -26,12 +26,28 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .card-tag-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .tag{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
 .cnt{font-size:12px}
-.big-price{font-size:24px;font-weight:700;line-height:1}
+.big-price{font-size:22px;font-weight:700;line-height:1}
 .price-sub{font-size:11px;margin-top:6px;opacity:0.75}
-.t59 .card-head{background:#EFF6FF}.t59 .tag{background:#DBEAFE;color:#1E40AF}.t59 .cnt{color:#3B82F6}.t59 .big-price,.t59 .price-sub{color:#1E3A8A}
-.t74 .card-head{background:#F0FDF4}.t74 .tag{background:#DCFCE7;color:#166534}.t74 .cnt{color:#22C55E}.t74 .big-price,.t74 .price-sub{color:#14532D}
-.t84 .card-head{background:#F5F3FF}.t84 .tag{background:#EDE9FE;color:#4C1D95}.t84 .cnt{color:#8B5CF6}.t84 .big-price,.t84 .price-sub{color:#2E1065}
-.t99 .card-head{background:#FFFBEB}.t99 .tag{background:#FEF3C7;color:#78350F}.t99 .cnt{color:#F59E0B}.t99 .big-price,.t99 .price-sub{color:#451A03}
+
+/* 84㎡ 계열 — 파랑 */
+.t84 .card-head{background:#EFF6FF}.t84 .tag{background:#DBEAFE;color:#1E40AF}
+.t84 .cnt{color:#3B82F6}.t84 .big-price,.t84 .price-sub{color:#1E3A8A}
+/* 104㎡ 계열 — 초록 */
+.t104 .card-head{background:#F0FDF4}.t104 .tag{background:#DCFCE7;color:#166534}
+.t104 .cnt{color:#22C55E}.t104 .big-price,.t104 .price-sub{color:#14532D}
+/* 118㎡ 계열 — 보라 */
+.t118 .card-head{background:#F5F3FF}.t118 .tag{background:#EDE9FE;color:#4C1D95}
+.t118 .cnt{color:#8B5CF6}.t118 .big-price,.t118 .price-sub{color:#2E1065}
+/* 141㎡ 계열 — 주황 */
+.t141 .card-head{background:#FFF7ED}.t141 .tag{background:#FED7AA;color:#7C2D12}
+.t141 .cnt{color:#F97316}.t141 .big-price,.t141 .price-sub{color:#7C2D12}
+/* 148㎡ 계열 — 핑크 */
+.t148 .card-head{background:#FFF1F2}.t148 .tag{background:#FFE4E6;color:#881337}
+.t148 .cnt{color:#F43F5E}.t148 .big-price,.t148 .price-sub{color:#881337}
+/* 208㎡ 계열 — 회색 */
+.t208 .card-head{background:#F8FAFC}.t208 .tag{background:#E2E8F0;color:#1E293B}
+.t208 .cnt{color:#64748B}.t208 .big-price,.t208 .price-sub{color:#1E293B}
+
 table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 td{padding:8px 14px;border-bottom:1px solid #f3f4f6;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 tr:last-child td{border-bottom:none}
@@ -72,7 +88,7 @@ button:hover{background:#f3f4f6}
       <div class="htitle">화서역 파크푸르지오</div>
       <div class="hsub">수원시 장안구 · <span id="drange">-</span></div>
     </div>
-    <span class="badge sample" id="badge">불러오는 중...</span>
+    <span class="badge loading" id="badge">불러오는 중...</span>
   </div>
 
   <div class="updated" id="updated"></div>
@@ -84,7 +100,7 @@ button:hover{background:#f3f4f6}
   <details class="panel">
     <summary><span class="panel-title">실시간 데이터 연동</span><span style="font-size:12px;color:#aaa">▾</span></summary>
     <div class="panel-body">
-      <div class="panel-sub">API 키가 코드에 내장되어 있어 자동으로 불러옵니다.<br>아래 버튼으로 수동으로 다시 불러올 수 있습니다.</div>
+      <div class="panel-sub">API 키가 내장되어 자동으로 불러옵니다.</div>
       <button onclick="loadData()" style="width:100%">데이터 다시 불러오기</button>
       <div class="msg" id="amsg"></div>
     </div>
@@ -96,7 +112,7 @@ button:hover{background:#f3f4f6}
       <input type="text" id="qu" value="https://mangury.github.io/hwaseo-park-prugio-info/">
       <button onclick="gqr()">생성</button>
     </div>
-    <div class="qr-area" id="qbox-area">
+    <div class="qr-area">
       <div class="qr-ph" id="qbox-ph">생성 버튼을 눌러주세요</div>
       <div id="qbox"></div>
     </div>
@@ -109,12 +125,27 @@ const API_KEY = 'c6425e966694d23917ef40d292e3b4f5fa57992dcd8ca0caf40fcf490c1146f
 const TODAY = new Date();
 const FROM  = new Date(TODAY); FROM.setMonth(FROM.getMonth()-2);
 
-const ATS=['59','74','84','99'];
-const ALB={'59':'59㎡','74':'74㎡','84':'84㎡','99':'99㎡'};
-const CLS={'59':'t59','74':'t74','84':'t84','99':'t99'};
-const NAME='화서역파크푸르지오';
+/* 평형 타입 정의
+   83A·84B      → '84'  (80~90)
+   104A·105B    → '104' (90~112)
+   116A·118B·C  → '118' (112~130)
+   140B·141A    → '141' (130~145)
+   148A·148B    → '148' (145~175)
+   208A·208B    → '208' (175~)
+*/
+const ATS  = ['84','104','118','141','148','208'];
+const ALB  = {'84':'84㎡','104':'104㎡','118':'118㎡','141':'141㎡','148':'148㎡','208':'208㎡'};
+const CLS  = {'84':'t84','104':'t104','118':'t118','141':'t141','148':'t148','208':'t208'};
+const NAME = '화서역파크푸르지오';
 
-function gt(a){return a<65?'59':a<80?'74':a<92?'84':'99';}
+function gt(a){
+  if(a<90)  return '84';
+  if(a<112) return '104';
+  if(a<130) return '118';
+  if(a<145) return '141';
+  if(a<175) return '148';
+  return '208';
+}
 function inR(y,m,d){const t=new Date(y,m-1,d);return t>=FROM&&t<=TODAY;}
 function fdt(dt){return`${dt.getFullYear()}.${p2(dt.getMonth()+1)}.${p2(dt.getDate())}`;}
 function p2(n){return String(n).padStart(2,'0');}
@@ -130,8 +161,8 @@ function pi(v){return parseInt(str(v),10)||0;}
 function pf(v){return parseFloat(str(v))||0;}
 function setBadge(s){
   const b=document.getElementById('badge');
-  const map={live:['badge live','실시간 데이터'],loading:['badge loading','불러오는 중...'],error:['badge error','오류'],sample:['badge sample','샘플 데이터']};
-  b.className=map[s][0]; b.textContent=map[s][1];
+  const m={live:['badge live','실시간 데이터'],loading:['badge loading','불러오는 중...'],error:['badge error','오류'],sample:['badge sample','샘플 데이터']};
+  b.className=m[s][0]; b.textContent=m[s][1];
 }
 function noData(c){return`<tr class="empty"><td colspan="${c}">이 기간 거래 없음</td></tr>`;}
 
@@ -184,7 +215,7 @@ function renderRent(data){
 }
 
 function getMonths(){
-  const now=new Date(), months=[];
+  const now=new Date(),months=[];
   for(let i=0;i<3;i++){
     const dt=new Date(now.getFullYear(),now.getMonth()-i,1);
     months.push(dt.getFullYear()+p2(dt.getMonth()+1));
@@ -192,7 +223,7 @@ function getMonths(){
   return months;
 }
 
-async function fetchOne(type, ym){
+async function fetchOne(type,ym){
   const EP=type==='sale'
     ?'RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev'
     :'RTMSDataSvcAptRent/getRTMSDataSvcAptRent';
@@ -209,16 +240,13 @@ async function loadData(){
   msg.className='msg ing'; msg.textContent='불러오는 중...';
   try{
     const months=getMonths();
-    let si=[], ri=[];
+    let si=[],ri=[];
     for(const ym of months){
       const [s,r]=await Promise.all([fetchOne('sale',ym),fetchOne('rent',ym)]);
       si=si.concat(s); ri=ri.concat(r);
     }
-
     const fa=arr=>arr.filter(it=>(it['아파트']||it['aptNm']||'').replace(/\s/g,'').includes(NAME));
-    const fsi=fa(si), fri=fa(ri);
-
-    const SD=fsi.map(it=>({
+    const SD=fa(si).map(it=>({
       y:pi(it['년']||it['dealYear']),
       m:pi(it['월']||it['dealMonth']),
       d:pi(it['일']||it['dealDay']),
@@ -227,8 +255,7 @@ async function loadData(){
       floor:pi(it['층']||it['floor']),
       type:gt(pf(it['전용면적']||it['excluUseAr']))
     })).filter(x=>x.price>0&&inR(x.y,x.m,x.d));
-
-    const RD=fri.map(it=>({
+    const RD=fa(ri).map(it=>({
       y:pi(it['년']||it['contractYear']||it['dealYear']),
       m:pi(it['월']||it['contractMonth']||it['dealMonth']),
       d:pi(it['일']||it['contractDay']||it['dealDay']),
@@ -238,7 +265,6 @@ async function loadData(){
       floor:pi(it['층']||it['floor']),
       type:gt(pf(it['전용면적']||it['excluUseAr']))
     })).filter(x=>x.dep>0&&inR(x.y,x.m,x.d));
-
     setBadge('live');
     msg.className='msg ok';
     msg.textContent=`매매 ${SD.length}건 · 전월세 ${RD.length}건 불러오기 완료`;
