@@ -152,7 +152,7 @@ function fcs(w){if(!w)return'-';const u=Math.floor(w/10000),r=w%10000;if(u>0&&r>
 function fdt(dt){return`${dt.getFullYear()}.${String(dt.getMonth()+1).padStart(2,'0')}.${String(dt.getDate()).padStart(2,'0')}`;}
 function fd(y,m,d){const s=n=>String(n).padStart(2,'0');return y!==TODAY.getFullYear()?`${y}.${s(m)}.${s(d)}`:`${s(m)}.${s(d)}`;}
 
-const API_KEY = 'c6425e966694d23917ef40d292e3b4f5fa57992dcd8ca0caf40fcf490c1146f2'; // ← 여기에 발급받은 API 키 입력
+const API_KEY = 'c6425e966694d23917ef40d292e3b4f5fa57992dcd8ca0caf40fcf490c1146f2'; // ← 실제 API 키로 교체
 
 const ATS=['59','74','84','99'],ALB={'59':'59㎡','74':'74㎡','84':'84㎡','99':'99㎡'};
 const CLS={'59':'t59','74':'t74','84':'t84','99':'t99'};
@@ -252,7 +252,7 @@ function getMonths(){
 }
 
 async function callApi(type, ym) {
-  const PROXY = 'https://api.allorigins.win/raw?url=';
+  const PROXY = 'https://corsproxy.io/?';
   const EP = type==='sale'
     ? 'RTMSDataSvcAptTradeDev/getRTMSDataSvcAptTradeDev'
     : 'RTMSDataSvcAptRent/getRTMSDataSvcAptRent';
@@ -276,19 +276,16 @@ async function fetchAll(){
       const [s,r]=await Promise.all([callApi('sale',ym),callApi('rent',ym)]);
       si=si.concat(s);ri=ri.concat(r);
     }
-    const fa=arr=>arr.filter(it=>(it['아파트']||it['aptNm']||'').replace(/\s/g,'').includes(NAME));
+    const fa=arr=>arr.filter(it=>(it['아파트']||'').replace(/\s/g,'').includes(NAME));
     SD=fa(si).map(it=>{
-      const area=parseFloat(it['전용면적']||it['excluUseAr']||0);
-      const price=parseInt((it['거래금액']||it['dealAmount']||'0').replace(/,/g,''),10);
-      const y=parseInt(it['년']||it['dealYear']||0,10),m=parseInt(it['월']||it['dealMonth']||0,10),d=parseInt(it['일']||it['dealDay']||0,10);
-      return{y,m,d,area,price,floor:parseInt(it['층']||it['floor']||0,10),type:gt(area)};
+      const area=parseFloat(it['전용면적']||0),price=parseInt((it['거래금액']||'0').replace(/,/g,''),10);
+      const y=parseInt(it['년']||0,10),m=parseInt(it['월']||0,10),d=parseInt(it['일']||0,10);
+      return{y,m,d,area,price,floor:parseInt(it['층']||0,10),type:gt(area)};
     }).filter(x=>x.price>0&&inR(x.y,x.m,x.d));
     RD=fa(ri).map(it=>{
-      const area=parseFloat(it['전용면적']||it['excluUseAr']||0);
-      const dep=parseInt((it['보증금액']||it['deposit']||'0').replace(/,/g,''),10);
-      const mon=parseInt((it['월세금액']||it['monthlyRent']||'0').replace(/,/g,''),10);
-      const y=parseInt(it['년']||it['contractYear']||0,10),m=parseInt(it['월']||it['contractMonth']||0,10),d=parseInt(it['일']||it['contractDay']||0,10);
-      return{y,m,d,area,dep,mon,floor:parseInt(it['층']||it['floor']||0,10),type:gt(area)};
+      const area=parseFloat(it['전용면적']||0),dep=parseInt((it['보증금액']||'0').replace(/,/g,''),10),mon=parseInt((it['월세금액']||'0').replace(/,/g,''),10);
+      const y=parseInt(it['년']||0,10),m=parseInt(it['월']||0,10),d=parseInt(it['일']||0,10);
+      return{y,m,d,area,dep,mon,floor:parseInt(it['층']||0,10),type:gt(area)};
     }).filter(x=>x.dep>0&&inR(x.y,x.m,x.d));
     setBadge('live');
     msg.className='msg ok';msg.textContent=`매매 ${SD.length}건 · 전월세 ${RD.length}건 불러오기 완료`;
