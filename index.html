@@ -292,15 +292,15 @@ async function fetchAll(){
 
     SD=fsi.map(it=>{
       const area=parseFloat(it['전용면적']||it['excluUseAr']||0);
-      const price=parseInt((it['거래금액']||it['dealAmount']||'0').replace(/,/g,''),10);
+      const price=parseInt(String(it['거래금액']||it['dealAmount']||'0').replace(/,/g,''),10);
       const y=parseInt(it['년']||it['dealYear']||0,10),m=parseInt(it['월']||it['dealMonth']||0,10),d=parseInt(it['일']||it['dealDay']||0,10);
       return{y,m,d,area,price,floor:parseInt(it['층']||it['floor']||0,10),type:gt(area)};
     }).filter(x=>x.price>0&&inR(x.y,x.m,x.d));
 
     RD=fri.map(it=>{
       const area=parseFloat(it['전용면적']||it['excluUseAr']||0);
-      const dep=parseInt((it['보증금액']||it['deposit']||'0').replace(/,/g,''),10);
-      const mon=parseInt((it['월세금액']||it['monthlyRent']||'0').replace(/,/g,''),10);
+      const dep=parseInt(String(it['보증금액']||it['deposit']||'0').replace(/,/g,''),10);
+      const mon=parseInt(String(it['월세금액']||it['monthlyRent']||'0').replace(/,/g,''),10);
       const y=parseInt(it['년']||it['contractYear']||0,10),m=parseInt(it['월']||it['contractMonth']||0,10),d=parseInt(it['일']||it['contractDay']||0,10);
       return{y,m,d,area,dep,mon,floor:parseInt(it['층']||it['floor']||0,10),type:gt(area)};
     }).filter(x=>x.dep>0&&inR(x.y,x.m,x.d));
