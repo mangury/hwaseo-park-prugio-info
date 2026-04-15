@@ -170,8 +170,7 @@ function renderSale(data){
     return`<div class="card ${CLS[t]}">
       <div class="ch">
         <div class="crow"><span class="tag">${ALB[t]}</span><span class="cnt">${has?d.length+'건':'거래없음'}</span></div>
-        <div class="bp">${rp}${arr}</div>
-        <div class="ps">${lo?lo+' ~ '+hi:'최근 거래가'}</div>
+        
       </div>
       <table><tbody>${rows}</tbody></table>
     </div>`;
@@ -195,7 +194,6 @@ function renderRent(data){
     return`<div class="card ${CLS[t]}">
       <div class="ch">
         <div class="crow"><span class="tag">${ALB[t]}</span><span class="cnt">${d.length}건</span></div>
-        <div class="bp" style="font-size:20px">${recent}</div>
         <div class="ps">${cnt}</div>
       </div>
       <table><tbody>${rows}</tbody></table>
