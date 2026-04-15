@@ -22,18 +22,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 @media(max-width:480px){.grid{grid-template-columns:1fr}}
 .card{background:#fff;border-radius:14px;overflow:hidden;border:1px solid #eee}
 .ch{padding:14px 16px 12px}
-.crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.crow{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
 .tag{font-size:14px;font-weight:600;padding:4px 12px;border-radius:999px}
 .cnt{font-size:14px}
-.bp{font-size:26px;font-weight:700;line-height:1}
-.ps{font-size:13px;margin-top:6px;opacity:.75}
-.t59 .ch{background:#F0FDFA}.t59 .tag{background:#CCFBF1;color:#134E4A}.t59 .cnt{color:#14B8A6}.t59 .bp,.t59 .ps{color:#134E4A}
-.t74 .ch{background:#EFF6FF}.t74 .tag{background:#BFDBFE;color:#1E3A8A}.t74 .cnt{color:#60A5FA}.t74 .bp,.t74 .ps{color:#1E3A8A}
-.t84 .ch{background:#F5F3FF}.t84 .tag{background:#EDE9FE;color:#4C1D95}.t84 .cnt{color:#8B5CF6}.t84 .bp,.t84 .ps{color:#2E1065}
-.t104 .ch{background:#F0FDF4}.t104 .tag{background:#DCFCE7;color:#166534}.t104 .cnt{color:#22C55E}.t104 .bp,.t104 .ps{color:#14532D}
-.t118 .ch{background:#FFF7ED}.t118 .tag{background:#FED7AA;color:#7C2D12}.t118 .cnt{color:#F97316}.t118 .bp,.t118 .ps{color:#7C2D12}
-.t148 .ch{background:#FFFBEB}.t148 .tag{background:#FEF3C7;color:#78350F}.t148 .cnt{color:#F59E0B}.t148 .bp,.t148 .ps{color:#451A03}
-.t208 .ch{background:#F8FAFC}.t208 .tag{background:#E2E8F0;color:#1E293B}.t208 .cnt{color:#64748B}.t208 .bp,.t208 .ps{color:#1E293B}
+.ps{font-size:13px;opacity:.75}
+.t59 .ch{background:#F0FDFA}.t59 .tag{background:#CCFBF1;color:#134E4A}.t59 .cnt{color:#14B8A6}.t59 .ps{color:#134E4A}
+.t74 .ch{background:#EFF6FF}.t74 .tag{background:#BFDBFE;color:#1E3A8A}.t74 .cnt{color:#60A5FA}.t74 .ps{color:#1E3A8A}
+.t84 .ch{background:#F5F3FF}.t84 .tag{background:#EDE9FE;color:#4C1D95}.t84 .cnt{color:#8B5CF6}.t84 .ps{color:#2E1065}
+.t104 .ch{background:#F0FDF4}.t104 .tag{background:#DCFCE7;color:#166534}.t104 .cnt{color:#22C55E}.t104 .ps{color:#14532D}
+.t118 .ch{background:#FFF7ED}.t118 .tag{background:#FED7AA;color:#7C2D12}.t118 .cnt{color:#F97316}.t118 .ps{color:#7C2D12}
+.t148 .ch{background:#FFFBEB}.t148 .tag{background:#FEF3C7;color:#78350F}.t148 .cnt{color:#F59E0B}.t148 .ps{color:#451A03}
+.t208 .ch{background:#F8FAFC}.t208 .tag{background:#E2E8F0;color:#1E293B}.t208 .cnt{color:#64748B}.t208 .ps{color:#1E293B}
 table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
 td{padding:8px 10px;border-bottom:1px solid #f3f4f6;color:#333;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 tr:last-child td{border-bottom:none}
@@ -157,10 +156,8 @@ function renderSale(data){
   document.getElementById('sgrid').innerHTML=ATS.map(t=>{
     const d=[...data.filter(x=>x.type===t)].sort((a,b)=>(b.y*10000+b.m*100+b.d)-(a.y*10000+a.m*100+a.d));
     const has=d.length>0;
-    const rp=has?fc(d[0].price):'-';
     const lo=has&&d.length>1?fc(Math.min(...d.map(x=>x.price))):null;
     const hi=has&&d.length>1?fc(Math.max(...d.map(x=>x.price))):null;
-    const arr=has&&d.length>1?(d[0].price>d[d.length-1].price?' ▲':d[0].price<d[d.length-1].price?' ▼':''):'';
     const rows=has?d.map(x=>`<tr>
       <td style="width:24%;color:#888">${fd(x.y,x.m,x.d)}</td>
       <td style="width:14%;color:#888">${getTypeName(x.area)}</td>
@@ -170,7 +167,7 @@ function renderSale(data){
     return`<div class="card ${CLS[t]}">
       <div class="ch">
         <div class="crow"><span class="tag">${ALB[t]}</span><span class="cnt">${has?d.length+'건':'거래없음'}</span></div>
-        
+        <div class="ps">${lo?lo+' ~ '+hi:has?'거래가 범위':''}</div>
       </div>
       <table><tbody>${rows}</tbody></table>
     </div>`;
@@ -184,7 +181,6 @@ function renderRent(data){
     const jn=d.filter(x=>x.mon===0).length;
     const wl=d.filter(x=>x.mon>0).length;
     const cnt=has?[jn?`전세 ${jn}건`:'',wl?`월세 ${wl}건`:''].filter(Boolean).join(' · '):'거래없음';
-    const recent=has?(d[0].mon>0?`${fc(d[0].dep)} / ${d[0].mon}만`:fc(d[0].dep)):'-';
     const rows=has?d.map(x=>{const w=x.mon>0;return`<tr>
       <td style="width:22%;color:#888">${fd(x.y,x.m,x.d)}</td>
       <td style="width:26%;color:#888">${w?'월세':'전세'}·${getTypeName(x.area)}</td>
